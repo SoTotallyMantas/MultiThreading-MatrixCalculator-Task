@@ -1,10 +1,16 @@
+using DebugTools.Tools;
+
 namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        
+
         public Form1()
         {
             InitializeComponent();
+            Inspector inspect = new Inspector();
+            
         }
         private bool IsFirstMatrix1Valid()
         {
@@ -44,6 +50,7 @@ namespace WinFormsApp1
                 MessageBox.Show("The matrices cannot be multiplied");
                 return;
             }
+            
             //First Matrix
             flowLayoutPanelFirstMatrix.Controls.Clear();
             for (int i = 0; i < x1; i++)
@@ -55,6 +62,7 @@ namespace WinFormsApp1
                 a.TextAlign = HorizontalAlignment.Center;
                 a.Text = "A" + (i + 1).ToString();
                 flowLayoutPanelFirstMatrix.Controls.Add(a);
+               
                 if (i + 1 == x1)
                 {
                     flowLayoutPanelFirstMatrix.SetFlowBreak(a, true);
@@ -70,6 +78,7 @@ namespace WinFormsApp1
                     a.Size = new Size(33, 23);
                     a.Name = name_text.ToString();
                     flowLayoutPanelFirstMatrix.Controls.Add(a);
+                   
                     if (j + 1 == x1)
                     {
                         flowLayoutPanelFirstMatrix.SetFlowBreak(a, true);
@@ -77,6 +86,7 @@ namespace WinFormsApp1
                 }
             }
             // Second Matrix
+           
 
             flowLayoutPanelSecondMatrix.Controls.Clear();
             for (int i = 0; i < x2; i++)
@@ -103,6 +113,7 @@ namespace WinFormsApp1
                     a.Size = new Size(33, 23);
                     a.Name = name_text.ToString();
                     flowLayoutPanelSecondMatrix.Controls.Add(a);
+               
                     if (j + 1 == x2)
                     {
                         flowLayoutPanelSecondMatrix.SetFlowBreak(a, true);
@@ -137,28 +148,34 @@ namespace WinFormsApp1
                 return;
             }
             // Initializing 2D Arrays
-            int[,] FirstMatrix = new int[int.Parse(X1Input.Text), int.Parse(Y1Input.Text)];
-            int[,] SecondMatrix = new int[int.Parse(X2Input.Text), int.Parse(Y2Input.Text)];
-           
+            int[,] FirstMatrix = new int[int.Parse(Y1Input.Text), int.Parse(X1Input.Text)];
+            int[,] SecondMatrix = new int[int.Parse(Y2Input.Text), int.Parse(X2Input.Text)];
+
             
             // First Matrix Converting to 2D Array
-            for (int i = 0; i < x1; i++)
+            for (int i = 0; i < y1; i++)
             {
-                for (int j = 0; j < y1; j++)
+                for (int j = 0; j < x1; j++)
                 {
-
-                    FirstMatrix[i, j] = int.Parse(flowLayoutPanelFirstMatrix.Controls.Find(((i + 1) *10 + j + 1).ToString(), true)[0].Text);
-
-
+                    string controlName = ((i  +1) * 10 + j + 1).ToString();
+                    Control[] foundControls = flowLayoutPanelFirstMatrix.Controls.Find(controlName, true);
+                    if (foundControls.Length > 0)
+                    {
+                        FirstMatrix[i , j] = int.Parse(foundControls[0].Text);
+                    }
                 }
-
             }
             // Second Matrix Converting to 2D Array
-            for (int i = 0; i < x2; i++)
+            for (int i = 0; i < y2; i++)
             {
-                for (int j = 0; j < y2; j++)
+                for (int j = 0; j < x2; j++)
                 {
-                    SecondMatrix[i, j] = int.Parse(flowLayoutPanelSecondMatrix.Controls.Find(((i + 1) * 10 + j + 1).ToString(), true)[0].Text);
+                    string controlName = ((i + 1) * 10 + j + 1).ToString();
+                    Control[] foundControls = flowLayoutPanelSecondMatrix.Controls.Find(controlName, true);
+                    if (foundControls.Length > 0)
+                    {
+                        SecondMatrix[i, j] = int.Parse(foundControls[0].Text);
+                    }
                 }
             }
             // Multiplying the two matrices
@@ -193,7 +210,7 @@ namespace WinFormsApp1
                     TextBox a = new TextBox();
                     a.Size = new Size(33, 23);
                     a.Name = name_text.ToString();
-                    a.Text = ResultMatrix[j, i].ToString();
+                    a.Text = ResultMatrix[i, j].ToString();
                     a.ReadOnly = true;
                     flowLayoutPanelResult.Controls.Add(a);
                     if (j + 1 == ResultMatrix.GetLength(0))

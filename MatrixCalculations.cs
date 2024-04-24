@@ -27,56 +27,30 @@ public class MatrixCalculations
         var Stopwatch = new Stopwatch();
         Stopwatch.Start();
                 Thread[] threads = new Thread[x1];
-        
-                for (int i = 0; i < x1; i++)
-                {
-                    for (int j = 0; j < y2; j++)
-                    {
-                        int x = i;
-                        int y = j;
-                        threads[j] = new Thread(() => ResultMatrix[y, x] = Multiplication(firstMatrix, secondMatrix, x, y));
-                        threads[j].Start();
-                    }
-                    for (int j = 0; j < y2; j++)
-                    {
-                        threads[j].Join();
-                    }
-                }   
-                Stopwatch.Stop();
-        TimeSpan time1 = Stopwatch.Elapsed;
-        Stopwatch.Reset();
-      
-        // MultiThreading using Tasks
-        Stopwatch.Start();
-        var tasks = new Task[x1 * y2];
-        int taskIndex = 0;
+
         for (int i = 0; i < x1; i++)
         {
             for (int j = 0; j < y2; j++)
             {
                 int x = i;
                 int y = j;
-                tasks[taskIndex++] = Task.Run(() => ResultMatrix[y, x] = Multiplication(firstMatrix, secondMatrix, x, y));
+                threads[j] = new Thread(() =>
+                {
+                    
+                    ResultMatrix[x, y] = Multiplication(firstMatrix, secondMatrix, x, y);
+                });
+                threads[j].Start();
             }
-        }
-        
-
-        Task.WaitAll(tasks);
-        Stopwatch.Stop();
-        TimeSpan time2 = Stopwatch.Elapsed;
-        Stopwatch.Reset();
-        // MultiThreading using Parallel.For
-        Stopwatch.Start();
-        Parallel.For(0, x1, i =>
-        {
             for (int j = 0; j < y2; j++)
             {
-                ResultMatrix[j, i] = Multiplication(firstMatrix, secondMatrix, i, j);
+                threads[j].Join();
             }
-        });
+        }
         Stopwatch.Stop();
-        TimeSpan time3 = Stopwatch.Elapsed;
+        TimeSpan time1 = Stopwatch.Elapsed;
         Stopwatch.Reset();
+      
+       
 
         return ResultMatrix;
     }
