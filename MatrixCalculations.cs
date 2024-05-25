@@ -24,9 +24,8 @@ public class MatrixCalculations
             throw new Exception("The matrices cannot be multiplied");
         }
         // MultiThreading using Thread 
-        var Stopwatch = new Stopwatch();
-        Stopwatch.Start();
-                Thread[] threads = new Thread[x1];
+       
+                Thread[] threads = new Thread[y2];
 
         for (int i = 0; i < x1; i++)
         {
@@ -47,9 +46,7 @@ public class MatrixCalculations
                 threads[j].Join();
             }
         }
-        Stopwatch.Stop();
-        TimeSpan time1 = Stopwatch.Elapsed;
-        Stopwatch.Reset();
+      
       
        
 

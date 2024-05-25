@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            flowLayoutPanelFirstMatrix = new FlowLayoutPanel();
             Create = new Button();
             X1Input = new TextBox();
             Y1Input = new TextBox();
@@ -39,34 +38,27 @@
             Y2Input = new TextBox();
             label2 = new Label();
             label1 = new Label();
+            button1 = new Button();
             label3 = new Label();
-            flowLayoutPanelSecondMatrix = new FlowLayoutPanel();
             label6 = new Label();
             label7 = new Label();
             label8 = new Label();
-            flowLayoutPanelResult = new FlowLayoutPanel();
             label9 = new Label();
             Calculate = new Button();
-            button1 = new Button();
+            FirstMatrixGrid = new DataGridView();
+            SecondMatrixGrid = new DataGridView();
+            ResultMatrixGrid = new DataGridView();
             XYInputBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)FirstMatrixGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)SecondMatrixGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ResultMatrixGrid).BeginInit();
             SuspendLayout();
-            // 
-            // flowLayoutPanelFirstMatrix
-            // 
-            flowLayoutPanelFirstMatrix.AutoScroll = true;
-            flowLayoutPanelFirstMatrix.AutoSize = true;
-            flowLayoutPanelFirstMatrix.Location = new Point(12, 29);
-            flowLayoutPanelFirstMatrix.MinimumSize = new Size(200, 200);
-            flowLayoutPanelFirstMatrix.Name = "flowLayoutPanelFirstMatrix";
-            flowLayoutPanelFirstMatrix.Padding = new Padding(10);
-            flowLayoutPanelFirstMatrix.Size = new Size(394, 328);
-            flowLayoutPanelFirstMatrix.TabIndex = 0;
             // 
             // Create
             // 
-            Create.Location = new Point(0, 418);
+            Create.Location = new Point(0, 419);
             Create.Name = "Create";
-            Create.Size = new Size(1264, 23);
+            Create.Size = new Size(184, 23);
             Create.TabIndex = 1;
             Create.Text = "Create";
             Create.UseVisualStyleBackColor = true;
@@ -88,7 +80,6 @@
             // 
             // XYInputBox
             // 
-            XYInputBox.Controls.Add(button1);
             XYInputBox.Controls.Add(label4);
             XYInputBox.Controls.Add(label5);
             XYInputBox.Controls.Add(X2Input);
@@ -106,7 +97,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(483, 9);
+            label4.Location = new Point(495, 9);
             label4.Name = "label4";
             label4.Size = new Size(14, 15);
             label4.TabIndex = 9;
@@ -115,7 +106,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(437, 9);
+            label5.Location = new Point(449, 9);
             label5.Name = "label5";
             label5.Size = new Size(14, 15);
             label5.TabIndex = 8;
@@ -123,14 +114,14 @@
             // 
             // X2Input
             // 
-            X2Input.Location = new Point(431, 27);
+            X2Input.Location = new Point(443, 27);
             X2Input.Name = "X2Input";
             X2Input.Size = new Size(46, 23);
             X2Input.TabIndex = 6;
             // 
             // Y2Input
             // 
-            Y2Input.Location = new Point(483, 27);
+            Y2Input.Location = new Point(495, 27);
             Y2Input.Name = "Y2Input";
             Y2Input.Size = new Size(43, 23);
             Y2Input.TabIndex = 7;
@@ -153,6 +144,16 @@
             label1.TabIndex = 4;
             label1.Text = "X";
             // 
+            // button1
+            // 
+            button1.Location = new Point(354, 419);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 23);
+            button1.TabIndex = 10;
+            button1.Text = "Generate Values";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -161,17 +162,6 @@
             label3.Size = new Size(66, 15);
             label3.TabIndex = 5;
             label3.Text = "First Matrix";
-            // 
-            // flowLayoutPanelSecondMatrix
-            // 
-            flowLayoutPanelSecondMatrix.AutoScroll = true;
-            flowLayoutPanelSecondMatrix.AutoSize = true;
-            flowLayoutPanelSecondMatrix.Location = new Point(437, 29);
-            flowLayoutPanelSecondMatrix.MinimumSize = new Size(200, 200);
-            flowLayoutPanelSecondMatrix.Name = "flowLayoutPanelSecondMatrix";
-            flowLayoutPanelSecondMatrix.Padding = new Padding(10);
-            flowLayoutPanelSecondMatrix.Size = new Size(393, 328);
-            flowLayoutPanelSecondMatrix.TabIndex = 1;
             // 
             // label6
             // 
@@ -202,17 +192,6 @@
             label8.TabIndex = 8;
             label8.Text = "=";
             // 
-            // flowLayoutPanelResult
-            // 
-            flowLayoutPanelResult.AutoScroll = true;
-            flowLayoutPanelResult.AutoSize = true;
-            flowLayoutPanelResult.Location = new Point(852, 29);
-            flowLayoutPanelResult.MinimumSize = new Size(200, 200);
-            flowLayoutPanelResult.Name = "flowLayoutPanelResult";
-            flowLayoutPanelResult.Padding = new Padding(10);
-            flowLayoutPanelResult.Size = new Size(393, 328);
-            flowLayoutPanelResult.TabIndex = 2;
-            // 
             // label9
             // 
             label9.AutoSize = true;
@@ -224,23 +203,41 @@
             // 
             // Calculate
             // 
-            Calculate.Location = new Point(0, 439);
+            Calculate.Location = new Point(190, 419);
             Calculate.Name = "Calculate";
-            Calculate.Size = new Size(1264, 28);
+            Calculate.Size = new Size(158, 23);
             Calculate.TabIndex = 10;
             Calculate.Text = "Calculate";
             Calculate.UseVisualStyleBackColor = true;
             Calculate.Click += Calculate_Click;
             // 
-            // button1
+            // FirstMatrixGrid
             // 
-            button1.Location = new Point(574, 26);
-            button1.Name = "button1";
-            button1.Size = new Size(152, 23);
-            button1.TabIndex = 10;
-            button1.Text = "Generate Values";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            FirstMatrixGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            FirstMatrixGrid.Location = new Point(12, 49);
+            FirstMatrixGrid.Name = "FirstMatrixGrid";
+            FirstMatrixGrid.RowHeadersWidth = 20;
+            FirstMatrixGrid.RowTemplate.Height = 25;
+            FirstMatrixGrid.Size = new Size(385, 308);
+            FirstMatrixGrid.TabIndex = 11;
+            // 
+            // SecondMatrixGrid
+            // 
+            SecondMatrixGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            SecondMatrixGrid.Location = new Point(450, 49);
+            SecondMatrixGrid.Name = "SecondMatrixGrid";
+            SecondMatrixGrid.RowTemplate.Height = 25;
+            SecondMatrixGrid.Size = new Size(376, 308);
+            SecondMatrixGrid.TabIndex = 12;
+            // 
+            // ResultMatrixGrid
+            // 
+            ResultMatrixGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            ResultMatrixGrid.Location = new Point(865, 49);
+            ResultMatrixGrid.Name = "ResultMatrixGrid";
+            ResultMatrixGrid.RowTemplate.Height = 25;
+            ResultMatrixGrid.Size = new Size(387, 308);
+            ResultMatrixGrid.TabIndex = 13;
             // 
             // Form1
             // 
@@ -248,15 +245,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(1264, 467);
+            Controls.Add(ResultMatrixGrid);
+            Controls.Add(SecondMatrixGrid);
+            Controls.Add(FirstMatrixGrid);
+            Controls.Add(button1);
             Controls.Add(Calculate);
             Controls.Add(label9);
-            Controls.Add(flowLayoutPanelResult);
             Controls.Add(label6);
-            Controls.Add(flowLayoutPanelSecondMatrix);
             Controls.Add(label3);
             Controls.Add(XYInputBox);
             Controls.Add(Create);
-            Controls.Add(flowLayoutPanelFirstMatrix);
             Controls.Add(label8);
             Controls.Add(label7);
             MaximumSize = new Size(1280, 720);
@@ -265,13 +263,14 @@
             Text = "Form1";
             XYInputBox.ResumeLayout(false);
             XYInputBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)FirstMatrixGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)SecondMatrixGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ResultMatrixGrid).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private FlowLayoutPanel flowLayoutPanelFirstMatrix;
         private Button Create;
         private TextBox X1Input;
         private TextBox Y1Input;
@@ -279,7 +278,6 @@
         private Label label2;
         private Label label1;
         private Label label3;
-        private FlowLayoutPanel flowLayoutPanelSecondMatrix;
         private Label label4;
         private Label label5;
         private TextBox X2Input;
@@ -287,9 +285,11 @@
         private Label label6;
         private Label label7;
         private Label label8;
-        private FlowLayoutPanel flowLayoutPanelResult;
         private Label label9;
         private Button Calculate;
         private Button button1;
+        private DataGridView FirstMatrixGrid;
+        private DataGridView SecondMatrixGrid;
+        private DataGridView ResultMatrixGrid;
     }
 }
