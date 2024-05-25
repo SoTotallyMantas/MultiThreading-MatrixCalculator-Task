@@ -47,6 +47,7 @@
             flowLayoutPanelResult = new FlowLayoutPanel();
             label9 = new Label();
             Calculate = new Button();
+            button1 = new Button();
             XYInputBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -87,6 +88,7 @@
             // 
             // XYInputBox
             // 
+            XYInputBox.Controls.Add(button1);
             XYInputBox.Controls.Add(label4);
             XYInputBox.Controls.Add(label5);
             XYInputBox.Controls.Add(X2Input);
@@ -230,6 +232,16 @@
             Calculate.UseVisualStyleBackColor = true;
             Calculate.Click += Calculate_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(574, 26);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 23);
+            button1.TabIndex = 10;
+            button1.Text = "Generate Values";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -278,5 +290,6 @@
         private FlowLayoutPanel flowLayoutPanelResult;
         private Label label9;
         private Button Calculate;
+        private Button button1;
     }
 }

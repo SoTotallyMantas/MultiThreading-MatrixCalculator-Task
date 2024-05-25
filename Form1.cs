@@ -4,13 +4,13 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        
+
 
         public Form1()
         {
             InitializeComponent();
             Inspector inspect = new Inspector();
-            
+
         }
         private bool IsFirstMatrix1Valid()
         {
@@ -28,29 +28,29 @@ namespace WinFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             //Check if the inputs are valid
-            if(!IsFirstMatrix1Valid())
+            if (!IsFirstMatrix1Valid())
             {
                 MessageBox.Show("Please enter a valid number for the first matrix");
                 return;
             }
             int x1 = X1Input.Text.Any() ? int.Parse(X1Input.Text) : 0;
             int y1 = Y1Input.Text.Any() ? int.Parse(Y1Input.Text) : 0;
-            
-            
-            if(!IsSecondMatrixValid())
+
+
+            if (!IsSecondMatrixValid())
             {
                 MessageBox.Show("Please enter a valid number for the second matrix");
                 return;
             }
             int x2 = X2Input.Text.Any() ? int.Parse(X2Input.Text) : 0;
             int y2 = Y2Input.Text.Any() ? int.Parse(Y2Input.Text) : 0;
-            
-            if(!IsMatrixMultiplicationValid())
+
+            if (!IsMatrixMultiplicationValid())
             {
                 MessageBox.Show("The matrices cannot be multiplied");
                 return;
             }
-            
+
             //First Matrix
             flowLayoutPanelFirstMatrix.Controls.Clear();
             for (int i = 0; i < x1; i++)
@@ -62,7 +62,7 @@ namespace WinFormsApp1
                 a.TextAlign = HorizontalAlignment.Center;
                 a.Text = "A" + (i + 1).ToString();
                 flowLayoutPanelFirstMatrix.Controls.Add(a);
-               
+
                 if (i + 1 == x1)
                 {
                     flowLayoutPanelFirstMatrix.SetFlowBreak(a, true);
@@ -78,7 +78,7 @@ namespace WinFormsApp1
                     a.Size = new Size(33, 23);
                     a.Name = name_text.ToString();
                     flowLayoutPanelFirstMatrix.Controls.Add(a);
-                   
+
                     if (j + 1 == x1)
                     {
                         flowLayoutPanelFirstMatrix.SetFlowBreak(a, true);
@@ -86,7 +86,7 @@ namespace WinFormsApp1
                 }
             }
             // Second Matrix
-           
+
 
             flowLayoutPanelSecondMatrix.Controls.Clear();
             for (int i = 0; i < x2; i++)
@@ -113,7 +113,7 @@ namespace WinFormsApp1
                     a.Size = new Size(33, 23);
                     a.Name = name_text.ToString();
                     flowLayoutPanelSecondMatrix.Controls.Add(a);
-               
+
                     if (j + 1 == x2)
                     {
                         flowLayoutPanelSecondMatrix.SetFlowBreak(a, true);
@@ -151,17 +151,17 @@ namespace WinFormsApp1
             int[,] FirstMatrix = new int[int.Parse(Y1Input.Text), int.Parse(X1Input.Text)];
             int[,] SecondMatrix = new int[int.Parse(Y2Input.Text), int.Parse(X2Input.Text)];
 
-            
+
             // First Matrix Converting to 2D Array
             for (int i = 0; i < y1; i++)
             {
                 for (int j = 0; j < x1; j++)
                 {
-                    string controlName = ((i  +1) * 10 + j + 1).ToString();
+                    string controlName = ((i + 1) * 10 + j + 1).ToString();
                     Control[] foundControls = flowLayoutPanelFirstMatrix.Controls.Find(controlName, true);
                     if (foundControls.Length > 0)
                     {
-                        FirstMatrix[i , j] = int.Parse(foundControls[0].Text);
+                        FirstMatrix[i, j] =  int.Parse(foundControls[0].Text);
                     }
                 }
             }
@@ -219,6 +219,41 @@ namespace WinFormsApp1
                     }
                 }
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            int x1 = X1Input.Text.Any() ? int.Parse(X1Input.Text) : 0;
+            int y1 = Y1Input.Text.Any() ? int.Parse(Y1Input.Text) : 0;
+            int x2 = X2Input.Text.Any() ? int.Parse(X2Input.Text) : 0;
+            int y2 = Y2Input.Text.Any() ? int.Parse(Y2Input.Text) : 0;
+            Random rand = new Random();
+            for (int i = 0; i < y1; i++)
+            {
+                for (int j = 0; j < x1; j++)
+                { 
+                    string controlName = ((i + 1) * 10 + j + 1).ToString();
+                    Control[] foundControls = flowLayoutPanelFirstMatrix.Controls.Find(controlName, true);
+                    if (foundControls.Length > 0)
+                    {
+                        foundControls[0].Text = rand.Next(1,50).ToString();
+                    }
+                }
+            }
+            Random rand2 = new Random();
+            for (int i = 0; i < y2; i++)
+            {
+                for (int j = 0; j < x2; j++)
+                {
+                    string controlName = ((i + 1) * 10 + j + 1).ToString();
+                    Control[] foundControls = flowLayoutPanelSecondMatrix.Controls.Find(controlName, true);
+                    if (foundControls.Length > 0)
+                    {
+                        foundControls[0].Text = rand2.Next(1,50).ToString();
+                    }
+                }
+            }
+
         }
     }
 }

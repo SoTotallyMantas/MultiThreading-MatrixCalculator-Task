@@ -34,6 +34,7 @@ public class MatrixCalculations
             {
                 int x = i;
                 int y = j;
+
                 threads[j] = new Thread(() =>
                 {
                     
